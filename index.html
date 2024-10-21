@@ -13,7 +13,7 @@
         }
 
         main.container {
-            background: rgba(255, 255, 255, 0.85);
+            background: rgba(255, 255, 255, 0.95);
             padding: 2rem;
             border-radius: 1rem;
         }
@@ -38,28 +38,28 @@
             <li><strong>Weight Tracker</strong></li>
         </ul>
         <ul>
-            <li><a href="#yourProgress">Your Progress</a></li>
+            <li><a href="#loisProgress">Lois's Progress</a></li>
             <li><a href="#mannysProgress">Manny's Progress</a></li>
             <li><a href="#combinedProgress" role="button">Combined Progress</a></li>
         </ul>
     </nav>
 
     <main class="container">
-        <section id="yourProgress">
+        <section id="loisProgress">
             <hgroup>
-                <h2>Your Progress</h2>
+                <h2>Lois's Progress</h2>
                 <h3>Goal vs Current Weight</h3>
             </hgroup>
-            <form id="yourForm">
-                <input type="number" id="yourBaseWeight" name="yourBaseWeight" placeholder="Enter your base weight"
-                    aria-label="Enter your base weight" required />
-                <input type="number" id="yourWeight" name="yourWeight" placeholder="Enter your current weight"
-                    aria-label="Enter your current weight" required />
-                <input type="date" id="yourDate" name="yourDate" placeholder="Date of entry"
+            <form id="loisForm">
+                <input type="number" id="loisBaseWeight" name="loisBaseWeight" placeholder="Enter Lois's base weight"
+                    aria-label="Enter Lois's base weight" required />
+                <input type="number" id="loisWeight" name="loisWeight" placeholder="Enter Lois's current weight"
+                    aria-label="Enter Lois's current weight" required />
+                <input type="date" id="loisDate" name="loisDate" placeholder="Date of entry"
                     aria-label="Date of weight entry" required />
                 <button type="submit">Update</button>
             </form>
-            <canvas id="yourProgressChart" width="400" height="200"></canvas>
+            <canvas id="loisProgressChart" width="400" height="200"></canvas>
         </section>
 
         <section id="mannysProgress">
@@ -82,7 +82,7 @@
         <section id="combinedProgress">
             <hgroup>
                 <h2>Combined Progress</h2>
-                <h3>Your Progress vs Manny's Progress</h3>
+                <h3>Lois's Progress vs Manny's Progress</h3>
             </hgroup>
             <canvas id="combinedProgressChart" width="400" height="200"></canvas>
         </section>
@@ -100,17 +100,17 @@
             localStorage.setItem(key, JSON.stringify(data));
         }
 
-        // Update your progress chart
-        function updateYourChart() {
-            const yourData = loadData('yourProgress');
-            const ctx = document.getElementById('yourProgressChart').getContext('2d');
+        // Update Lois's progress chart
+        function updateLoisChart() {
+            const loisData = loadData('loisProgress');
+            const ctx = document.getElementById('loisProgressChart').getContext('2d');
             new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: yourData.map(entry => entry.date),
+                    labels: loisData.map(entry => entry.date),
                     datasets: [{
-                        label: 'Your Weight',
-                        data: yourData.map(entry => entry.weight),
+                        label: "Lois's Weight",
+                        data: loisData.map(entry => entry.weight),
                         borderColor: 'rgba(75, 192, 192, 1)',
                         fill: false
                     }]
@@ -138,16 +138,16 @@
 
         // Update combined chart
         function updateCombinedChart() {
-            const yourData = loadData('yourProgress');
+            const loisData = loadData('loisProgress');
             const mannysData = loadData('mannysProgress');
             const ctx = document.getElementById('combinedProgressChart').getContext('2d');
             new Chart(ctx, {
                 type: 'line',
                 data: {
-                    labels: yourData.map(entry => entry.date),
+                    labels: loisData.map(entry => entry.date),
                     datasets: [{
-                        label: 'Your Weight',
-                        data: yourData.map(entry => entry.weight),
+                        label: "Lois's Weight",
+                        data: loisData.map(entry => entry.weight),
                         borderColor: 'rgba(75, 192, 192, 1)',
                         fill: false
                     }, {
@@ -161,14 +161,14 @@
         }
 
         // Form submission handlers
-        document.getElementById('yourForm').addEventListener('submit', function (e) {
+        document.getElementById('loisForm').addEventListener('submit', function (e) {
             e.preventDefault();
-            const weight = document.getElementById('yourWeight').value;
-            const date = document.getElementById('yourDate').value;
-            const progress = loadData('yourProgress');
+            const weight = document.getElementById('loisWeight').value;
+            const date = document.getElementById('loisDate').value;
+            const progress = loadData('loisProgress');
             progress.push({ weight, date });
-            saveData('yourProgress', progress);
-            updateYourChart();
+            saveData('loisProgress', progress);
+            updateLoisChart();
         });
 
         document.getElementById('mannysForm').addEventListener('submit', function (e) {
@@ -182,7 +182,7 @@
         });
 
         // Initial chart updates
-        updateYourChart();
+        updateLoisChart();
         updateMannysChart();
         updateCombinedChart();
     </script>
