@@ -5,10 +5,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Weight Tracker</title>
-  <link rel="stylesheet" href="https://unsplash.com/photos/a-hand-holding-a-dumbbell-PnaUlbS99Dc">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
   <style>
     body {
-      background-image: url('https://unsplash.com/photos/woman-doing-weight-lifting-h4i9G-de7Po');
+      background-image: url('https://source.unsplash.com/featured/?fitness,motivation');
       background-size: cover;
       background-attachment: fixed;
       padding: 0 2rem;
@@ -49,7 +49,7 @@
       <li><strong>Weight Tracker</strong></li>
     </ul>
     <ul>
-      <li><a href="#">Lois Progress</a></li>
+      <li><a href="#">Your Progress</a></li>
       <li><a href="#">Manny's Progress</a></li>
       <li><a href="#" role="button">Combined Progress</a></li>
     </ul>
@@ -58,17 +58,17 @@
     <div class="grid">
       <section>
         <hgroup>
-          <h2>Lois Progress</h2>
+          <h2>Your Progress</h2>
           <h3>Goal vs Current Weight</h3>
         </hgroup>
-        <p>Track Lois weight updates here:</p>
-        <form><input type="number" id="LoisWeight" name="LoisWeight" placeholder="Enter Lois current weight"
-            aria-label="Enter Lois current weight" required /><button type="submit">Update</button></form>
+        <p>Track your weight updates here:</p>
+        <form><input type="number" id="yourWeight" name="yourWeight" placeholder="Enter your current weight"
+            aria-label="Enter your current weight" required /><button type="submit">Update</button></form>
         <figure><img src="https://source.unsplash.com/featured/?health" alt="Health motivation" />
           <figcaption><a href="https://unsplash.com" target="_blank">Image by Unsplash</a></figcaption>
         </figure>
-        <h3>Lois Progress Graph</h3>
-        <p>Graph showing Lois progress will appear here.</p>
+        <h3>Your Progress Graph</h3>
+        <p>Graph showing your progress will appear here.</p>
       </section>
       <section>
         <hgroup>
@@ -91,11 +91,11 @@
       <article>
         <hgroup>
           <h2>Daily Exercise &amp; Feelings Log</h2>
-          <h3>Track Lois Daily Routine</h3>
+          <h3>Track Your Daily Routine</h3>
         </hgroup>
-        <form class="grid"><input type="text" id="LoisExercise" name="LoisExercise"
-            placeholder="Lois exercise for today" aria-label="Lois exercise for today" required /><input type="text"
-            id="LoisFeeling" name="LoisFeeling" placeholder="How are you feeling today?"
+        <form class="grid"><input type="text" id="yourExercise" name="yourExercise"
+            placeholder="Your exercise for today" aria-label="Your exercise for today" required /><input type="text"
+            id="yourFeeling" name="yourFeeling" placeholder="How are you feeling today?"
             aria-label="How are you feeling today?" required /><button type="submit">Submit</button></form>
         <form class="grid"><input type="text" id="mannysExercise" name="mannysExercise"
             placeholder="Manny's exercise for today" aria-label="Manny's exercise for today" required /><input
