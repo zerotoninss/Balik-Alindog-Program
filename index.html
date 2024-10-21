@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Balik Alindog Program</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="scripts.js" defer></script>
+</head>
+<body>
+  <header>
+    <h1>Balik Alindog Program</h1>
+    <p>Back to ka sexy-han ang krezies! Track your progress together.</p>
+  </header>
+
+  <section id="weights">
+    <h2>Enter Your Goal and Current Weight</h2>
+    <div class="user-section">
+      <h3>Your Progress</h3>
+      <label for="your-goal">Goal Weight:</label>
+      <input type="number" id="your-goal" placeholder="Enter your goal weight">
+      
+      <label for="your-current">Current Weight:</label>
+      <input type="number" id="your-current" placeholder="Enter your current weight">
+    </div>
+
+    <div class="user-section">
+      <h3>Manny’s Progress</h3>
+      <label for="manny-goal">Goal Weight:</label>
+      <input type="number" id="manny-goal" placeholder="Enter Manny's goal weight">
+      
+      <label for="manny-current">Current Weight:</label>
+      <input type="number" id="manny-current" placeholder="Enter Manny's current weight">
+    </div>
+  </section>
+
+  <section id="update-form">
+    <h2>Daily Updates</h2>
+
+    <form id="your-form">
+      <h3>Your Updates</h3>
+      <label>Today's Weight:</label>
+      <input type="number" id="your-weight-input" placeholder="Enter your weight">
+      <label>Exercise Plan:</label>
+      <input type="text" id="your-exercise-plan" placeholder="Your exercise today">
+      <label>How You Felt:</label>
+      <textarea id="your-feelings" placeholder="How are you feeling?"></textarea>
+      <button type="button" onclick="updateYourData()">Update</button>
+    </form>
+
+    <form id="manny-form">
+      <h3>Manny's Updates</h3>
+      <label>Today's Weight:</label>
+      <input type="number" id="manny-weight-input" placeholder="Enter Manny's weight">
+      <label>Exercise Plan:</label>
+      <input type="text" id="manny-exercise-plan" placeholder="Manny's exercise today">
+      <label>How He Felt:</label>
+      <textarea id="manny-feelings" placeholder="How is Manny feeling?"></textarea>
+      <button type="button" onclick="updateMannyData()">Update</button>
+    </form>
+  </section>
+
+  <section id="graphs">
+    <h2>Progress Graphs</h2>
+    <canvas id="yourGraph"></canvas>
+    <canvas id="mannyGraph"></canvas>
+    <canvas id="versusGraph"></canvas>
+  </section>
+</body>
+</html>
