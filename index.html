@@ -2,95 +2,190 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Weight Tracker</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
-  <style>
-    body {
-      background-image: url('https://i.pinimg.com/originals/7c/35/f3/7c35f3a7a2f72c503bd93b3c65d87035.jpg');
-      background-size: cover;
-      background-attachment: fixed;
-      padding: 0 2rem;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Weight Tracker</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
+    <style>
+        body {
+            background-color: #f7f7f7;
+            padding: 0 2rem;
+        }
 
-    main.container {
-      background: rgba(255, 255, 255, 0.85);
-      padding: 2rem;
-      border-radius: 1rem;
-    }
+        main.container {
+            background: rgba(255, 255, 255, 0.85);
+            padding: 2rem;
+            border-radius: 1rem;
+        }
 
-    figure img {
-      max-width: 100%;
-      border-radius: 1rem;
-    }
+        canvas {
+            margin-top: 2rem;
+        }
 
-    footer {
-      text-align: center;
-      padding: 1rem;
-      margin-top: 2rem;
-    }
+        h2, h3 {
+            color: #333;
+        }
 
-    h2,
-    h3 {
-      color: #333;
-    }
-
-    input,
-    button {
-      margin-top: 1rem;
-    }
-  </style>
+        input, button {
+            margin-top: 1rem;
+        }
+    </style>
 </head>
 
 <body>
-  <nav class="container-fluid">
-    <ul>
-      <li><strong>Weight Tracker</strong></li>
-    </ul>
-    <ul>
-      <li><a href="#">Your Progress</a></li>
-      <li><a href="#">Manny's Progress</a></li>
-      <li><a href="#" role="button">Combined Progress</a></li>
-    </ul>
-  </nav>
-  <main class="container">
-    <div class="grid">
-      <section>
-        <hgroup>
-          <h2>Weight Progress</h2>
-          <h3>Goal vs Current Weight</h3>
-        </hgroup>
-        <p>Set your base weight and track your updates:</p>
-        <form><input type="number" id="baseWeight" name="baseWeight" placeholder="Enter base weight"
-            aria-label="Enter base weight" required /><input type="number" id="currentWeight" name="currentWeight"
-            placeholder="Enter current weight" aria-label="Enter current weight" required /><input type="date"
-            id="weightDate" name="weightDate" placeholder="Date of entry" aria-label="Date of weight entry"
-            required /><button type="submit">Update</button></form>
-        <figure><img src="https://i.pinimg.com/originals/c7/7d/37/c77d37cf615803c86c5c60ba92b022ba.jpg"
-            alt="Motivation" />
-          <figcaption><a href="https://pinterest.com" target="_blank">Image by Pinterest</a></figcaption>
-        </figure>
-        <h3>Progress Graph</h3>
-        <p>Graph showing progress will appear here.</p>
-      </section>
-    </div>
-  </main>
-  <section aria-label="Daily Log">
-    <div class="container">
-      <article>
-        <hgroup>
-          <h2>Daily Exercise & Feelings Log</h2>
-          <h3>Track Your Daily Routine</h3>
-        </hgroup>
-        <form class="grid"><input type="text" id="exercise" name="exercise" placeholder="Exercise for today"
-            aria-label="Exercise for today" required /><input type="text" id="feeling" name="feeling"
-            placeholder="How are you feeling today?" aria-label="How are you feeling today?" required /><button
-            type="submit">Submit</button></form>
-      </article>
-    </div>
-  </section>
-  <footer class="container"><small><a href="#">Privacy Policy</a> • <a href="#">Terms of Service</a></small></footer>
+    <nav class="container-fluid">
+        <ul>
+            <li><strong>Weight Tracker</strong></li>
+        </ul>
+        <ul>
+            <li><a href="#yourProgress">Your Progress</a></li>
+            <li><a href="#mannysProgress">Manny's Progress</a></li>
+            <li><a href="#combinedProgress" role="button">Combined Progress</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <section id="yourProgress">
+            <hgroup>
+                <h2>Your Progress</h2>
+                <h3>Goal vs Current Weight</h3>
+            </hgroup>
+            <form id="yourForm">
+                <input type="number" id="yourBaseWeight" name="yourBaseWeight" placeholder="Enter your base weight"
+                    aria-label="Enter your base weight" required />
+                <input type="number" id="yourWeight" name="yourWeight" placeholder="Enter your current weight"
+                    aria-label="Enter your current weight" required />
+                <input type="date" id="yourDate" name="yourDate" placeholder="Date of entry"
+                    aria-label="Date of weight entry" required />
+                <button type="submit">Update</button>
+            </form>
+            <canvas id="yourProgressChart" width="400" height="200"></canvas>
+        </section>
+
+        <section id="mannysProgress">
+            <hgroup>
+                <h2>Manny's Progress</h2>
+                <h3>Goal vs Current Weight</h3>
+            </hgroup>
+            <form id="mannysForm">
+                <input type="number" id="mannysBaseWeight" name="mannysBaseWeight" placeholder="Enter Manny's base weight"
+                    aria-label="Enter Manny's base weight" required />
+                <input type="number" id="mannysWeight" name="mannysWeight" placeholder="Enter Manny's current weight"
+                    aria-label="Enter Manny's current weight" required />
+                <input type="date" id="mannysDate" name="mannysDate" placeholder="Date of entry"
+                    aria-label="Date of weight entry" required />
+                <button type="submit">Update</button>
+            </form>
+            <canvas id="mannysProgressChart" width="400" height="200"></canvas>
+        </section>
+
+        <section id="combinedProgress">
+            <hgroup>
+                <h2>Combined Progress</h2>
+                <h3>Your Progress vs Manny's Progress</h3>
+            </hgroup>
+            <canvas id="combinedProgressChart" width="400" height="200"></canvas>
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Function to load data from localStorage
+        function loadData(key) {
+            return JSON.parse(localStorage.getItem(key)) || [];
+        }
+
+        // Function to save data to localStorage
+        function saveData(key, data) {
+            localStorage.setItem(key, JSON.stringify(data));
+        }
+
+        // Update your progress chart
+        function updateYourChart() {
+            const yourData = loadData('yourProgress');
+            const ctx = document.getElementById('yourProgressChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: yourData.map(entry => entry.date),
+                    datasets: [{
+                        label: 'Your Weight',
+                        data: yourData.map(entry => entry.weight),
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        fill: false
+                    }]
+                }
+            });
+        }
+
+        // Update Manny's progress chart
+        function updateMannysChart() {
+            const mannysData = loadData('mannysProgress');
+            const ctx = document.getElementById('mannysProgressChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: mannysData.map(entry => entry.date),
+                    datasets: [{
+                        label: "Manny's Weight",
+                        data: mannysData.map(entry => entry.weight),
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        fill: false
+                    }]
+                }
+            });
+        }
+
+        // Update combined chart
+        function updateCombinedChart() {
+            const yourData = loadData('yourProgress');
+            const mannysData = loadData('mannysProgress');
+            const ctx = document.getElementById('combinedProgressChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: yourData.map(entry => entry.date),
+                    datasets: [{
+                        label: 'Your Weight',
+                        data: yourData.map(entry => entry.weight),
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        fill: false
+                    }, {
+                        label: "Manny's Weight",
+                        data: mannysData.map(entry => entry.weight),
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        fill: false
+                    }]
+                }
+            });
+        }
+
+        // Form submission handlers
+        document.getElementById('yourForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const weight = document.getElementById('yourWeight').value;
+            const date = document.getElementById('yourDate').value;
+            const progress = loadData('yourProgress');
+            progress.push({ weight, date });
+            saveData('yourProgress', progress);
+            updateYourChart();
+        });
+
+        document.getElementById('mannysForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const weight = document.getElementById('mannysWeight').value;
+            const date = document.getElementById('mannysDate').value;
+            const progress = loadData('mannysProgress');
+            progress.push({ weight, date });
+            saveData('mannysProgress', progress);
+            updateMannysChart();
+        });
+
+        // Initial chart updates
+        updateYourChart();
+        updateMannysChart();
+        updateCombinedChart();
+    </script>
 </body>
 
 </html>
