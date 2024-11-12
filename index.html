@@ -30,3 +30,78 @@
     </section>
 </body>
 </html>
+
+<!-- lois.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lois's Progress</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="lois-theme">
+    <header>
+        <h1>Lois's Weight Loss Journey</h1>
+        <a href="index.html">Back to Home</a>
+    </header>
+    <section>
+        <div class="graph-container">
+            <canvas id="loisWeightChart"></canvas>
+        </div>
+        <form id="weightForm">
+            <label for="weight">Today's Weight:</label>
+            <input type="number" id="weight" name="weight">
+            <button type="submit">Submit</button>
+        </form>
+        <div class="journal">
+            <label>Followed Diet?</label>
+            <input type="checkbox" id="dietYes" name="dietYes">
+            <label>Exercise Today?</label>
+            <input type="checkbox" id="exerciseYes" name="exerciseYes">
+        </div>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manny's Progress</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="manny-theme">
+    <header>
+        <h1>Manny's Weight Loss Journey</h1>
+        <a href="index.html">Back to Home</a>
+    </header>
+    
+    <section class="progress-section">
+        <canvas id="mannyWeightChart"></canvas>
+    </section>
+
+    <section class="tracker-section">
+        <form id="weightForm">
+            <h2>Daily Weight Tracker</h2>
+            <label for="weight">Today's Weight (kg):</label>
+            <input type="number" id="weight" name="weight" required>
+            
+            <div class="journal-entries">
+                <label for="diet">Followed Diet?</label>
+                <input type="checkbox" id="diet" name="diet">
+                
+                <label for="exercise">Exercise Today?</label>
+                <input type="checkbox" id="exercise" name="exercise">
+            </div>
+            
+            <button type="submit">Log Entry</button>
+        </form>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="manny.js"></script>
+</body>
+</html>
