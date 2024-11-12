@@ -1,280 +1,32 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Weight Tracker</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
-    <style>
-        body {
-            background-color: #f7f7f7;
-            padding: 0 2rem;
-        }
-
-        main.container {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 2rem;
-            border-radius: 1rem;
-        }
-
-        canvas {
-            margin-top: 2rem;
-        }
-
-        h2, h3 {
-            color: #333;
-        }
-
-        input, button, textarea {
-            margin-top: 1rem;
-        }
-
-        textarea {
-            width: 100%;
-            height: 100px;
-        }
-    </style>
+    <title>Lois and Manny's Progress</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
-    <nav class="container-fluid">
-        <ul>
-            <li><strong>Weight Tracker</strong></li>
-        </ul>
-        <ul>
-            <li><a href="#loisProgress">Lois's Progress</a></li>
-            <li><a href="#mannysProgress">Manny's Progress</a></li>
-            <li><a href="#combinedProgress" role="button">Combined Progress</a></li>
-        </ul>
-    </nav>
-
-    <main class="container">
-        <section id="loisProgress">
-            <hgroup>
-                <h2>Lois's Progress</h2>
-                <h3>Goal vs Current Weight</h3>
-            </hgroup>
-            <form id="loisForm">
-                <input type="number" id="loisBaseWeight" name="loisBaseWeight" placeholder="Enter Lois's base weight"
-                    aria-label="Enter Lois's base weight" required />
-                <input type="number" id="loisWeight" name="loisWeight" placeholder="Enter Lois's current weight"
-                    aria-label="Enter Lois's current weight" required />
-                <input type="date" id="loisDate" name="loisDate" placeholder="Date of entry"
-                    aria-label="Date of weight entry" required />
-                <button type="submit">Update</button>
-            </form>
-            <canvas id="loisProgressChart" width="400" height="200"></canvas>
-
-            <h3>Lois's Diary</h3>
-            <form id="loisDiaryForm">
-                <textarea id="loisDiary" name="loisDiary" placeholder="Write today's progress"></textarea>
-                <button type="submit">Save Entry</button>
-            </form>
-            <div id="loisDiaryDisplay"></div>
-        </section>
-
-        <section id="mannysProgress">
-            <hgroup>
-                <h2>Manny's Progress</h2>
-                <h3>Goal vs Current Weight</h3>
-            </hgroup>
-            <form id="mannysForm">
-                <input type="number" id="mannysBaseWeight" name="mannysBaseWeight" placeholder="Enter Manny's base weight"
-                    aria-label="Enter Manny's base weight" required />
-                <input type="number" id="mannysWeight" name="mannysWeight" placeholder="Enter Manny's current weight"
-                    aria-label="Enter Manny's current weight" required />
-                <input type="date" id="mannysDate" name="mannysDate" placeholder="Date of entry"
-                    aria-label="Date of weight entry" required />
-                <button type="submit">Update</button>
-            </form>
-            <canvas id="mannysProgressChart" width="400" height="200"></canvas>
-
-            <h3>Manny's Diary</h3>
-            <form id="mannysDiaryForm">
-                <textarea id="mannysDiary" name="mannysDiary" placeholder="Write today's progress"></textarea>
-                <button type="submit">Save Entry</button>
-            </form>
-            <div id="mannysDiaryDisplay"></div>
-        </section>
-
-        <section id="combinedProgress">
-            <hgroup>
-                <h2>Combined Progress</h2>
-                <h3>Lois's Progress vs Manny's Progress</h3>
-            </hgroup>
-            <canvas id="combinedProgressChart" width="400" height="200"></canvas>
-        </section>
-    </main>
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        // Function to load data from localStorage
-        function loadData(key) {
-            return JSON.parse(localStorage.getItem(key)) || [];
-        }
-
-        // Function to save data to localStorage
-        function saveData(key, data) {
-            localStorage.setItem(key, JSON.stringify(data));
-        }
-
-        // Update Lois's progress chart (y-axis: weight, x-axis: date)
-        function updateLoisChart() {
-            const loisData = loadData('loisProgress');
-            const ctx = document.getElementById('loisProgressChart').getContext('2d');
-            new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: loisData.map(entry => entry.date),
-                    datasets: [{
-                        label: "Lois's Weight",
-                        data: loisData.map(entry => entry.weight),
-                        borderColor: 'rgba(75, 192, 192, 1)',
-                        fill: false
-                    }]
-                },
-                options: {
-                    scales: {
-                        x: {
-                            type: 'time',
-                            time: {
-                                unit: 'day'
-                            }
-                        },
-                        y: {
-                            beginAtZero: false,
-                            title: {
-                                display: true,
-                                text: 'Weight (kg)'
-                            }
-                        }
-                    }
-                }
-            });
-        }
-
-        // Update Manny's progress chart (y-axis: weight, x-axis: date)
-        function updateMannysChart() {
-            const mannysData = loadData('mannysProgress');
-            const ctx = document.getElementById('mannysProgressChart').getContext('2d');
-            new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: mannysData.map(entry => entry.date),
-                    datasets: [{
-                        label: "Manny's Weight",
-                        data: mannysData.map(entry => entry.weight),
-                        borderColor: 'rgba(255, 99, 132, 1)',
-                        fill: false
-                    }]
-                },
-                options: {
-                    scales: {
-                        x: {
-                            type: 'time',
-                            time: {
-                                unit: 'day'
-                            }
-                        },
-                        y: {
-                            beginAtZero: false,
-                            title: {
-                                display: true,
-                                text: 'Weight (kg)'
-                            }
-                        }
-                    }
-                }
-            });
-        }
-
-        // Update combined chart (y-axis: weight, x-axis: date)
-        function updateCombinedChart() {
-            const loisData = loadData('loisProgress');
-            const mannysData = loadData('mannysProgress');
-            const ctx = document.getElementById('combinedProgressChart').getContext('2d');
-            new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: loisData.map(entry => entry.date),
-                    datasets: [{
-                        label: "Lois's Weight",
-                        data: loisData.map(entry => entry.weight),
-                        borderColor: 'rgba(75, 192, 192, 1)',
-                        fill: false
-                    }, {
-                        label: "Manny's Weight",
-                        data: mannysData.map(entry => entry.weight),
-                        borderColor: 'rgba(255, 99, 132, 1)',
-                        fill: false
-                    }]
-                },
-                options: {
-                    scales: {
-                        x: {
-                            type: 'time',
-                            time: {
-                                unit: 'day'
-                            }
-                        },
-                        y: {
-                            beginAtZero: false,
-                            title: {
-                                display: true,
-                                text: 'Weight (kg)'
-                            }
-                        }
-                    }
-                }
-            });
-        }
-
-        // Form submission handlers
-        document.getElementById('loisForm').addEventListener('submit', function (e) {
-            e.preventDefault();
-            const weight = document.getElementById('loisWeight').value;
-            const date = document.getElementById('loisDate').value;
-            const progress = loadData('loisProgress');
-            progress.push({ weight, date });
-            saveData('loisProgress', progress);
-            updateLoisChart();
-        });
-
-        document.getElementById('mannysForm').addEventListener('submit', function (e) {
-            e.preventDefault();
-            const weight = document.getElementById('mannysWeight').value;
-            const date = document.getElementById('mannysDate').value;
-            const progress = loadData('mannysProgress');
-            progress.push({ weight, date });
-            saveData('mannysProgress', progress);
-            updateMannysChart();
-        });
-
-        // Diary submission handlers for Lois and Manny
-        document.getElementById('loisDiaryForm').addEventListener('submit', function (e) {
-            e.preventDefault();
-            const diary = document.getElementById('loisDiary').value;
-            const diaryEntries = loadData('loisDiary');
-            diaryEntries.push({ diary });
-            saveData('loisDiary', diaryEntries);
-            document.getElementById('loisDiaryDisplay').innerHTML = diaryEntries.map(entry => `<p>${entry.diary}</p>`).join('');
-        });
-
-        document.getElementById('mannysDiaryForm').addEventListener('submit', function (e) {
-            e.preventDefault();
-            const diary = document.getElementById('mannysDiary').value;
-            const diaryEntries = loadData('mannysDiary');
-            diaryEntries.push({ diary });
-            saveData('mannysDiary', diaryEntries);
-            document.getElementById('mannysDiaryDisplay').innerHTML = diaryEntries.map(entry => `<p>${entry.diary}</p>`).join('');
-        });
-
-        // Initial chart updates
-        updateLoisChart();
-        updateMannysChart();
-        updateCombinedChart();
-    </script>
+    <header>
+        <h1>Lois & Manny’s Weight Loss Journey</h1>
+        <nav>
+            <a href="lois.html">Lois's Progress</a>
+            <a href="manny.html">Manny's Progress</a>
+        </nav>
+    </header>
+    <section>
+        <div class="card">
+            <h2>Lois</h2>
+            <p>Latest Weight: XX kg</p>
+            <p>Followed Diet? Yes/No</p>
+            <a href="lois.html">View Full Progress</a>
+        </div>
+        <div class="card">
+            <h2>Manny</h2>
+            <p>Latest Weight: XX kg</p>
+            <p>Followed Diet? Yes/No</p>
+            <a href="manny.html">View Full Progress</a>
+        </div>
+    </section>
 </body>
-
 </html>
